@@ -1,0 +1,18 @@
+[Unit]
+Description=GitScope (Next.js production server and MCP)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/absolute/path/to/gitscope
+Environment=NODE_ENV=production
+Environment=GITSCOPE_PUBLIC_URL=https://your-machine.your-tailnet.ts.net:8447
+Environment=GITSCOPE_DIST_DIR=.next
+Environment=PATH=/usr/local/bin:/usr/bin:/bin
+ExecStart=/absolute/path/to/node /absolute/path/to/gitscope/node_modules/next/dist/bin/next start -H 127.0.0.1 -p 3000
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target
